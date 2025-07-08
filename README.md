@@ -2,7 +2,7 @@
 
 [![npm version](https://badge.fury.io/js/vnlog.svg)](https://badge.fury.io/js/vnlog)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Node.js CI](https://github.com/your-username/vnlog/workflows/Node.js%20CI/badge.svg)](https://github.com/your-username/vnlog/actions)
+<!-- [![Node.js CI](https://github.com/vnox/vnlog/workflows/Node.js%20CI/badge.svg)](https://github.com/vnox/vnlog/actions) -->
 
 Smart logger with environment detection and rich formatting. Only outputs in development, completely silent in production.
 
