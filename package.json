@@ -1,6 +1,6 @@
 {
   "name": "vnlog",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Smart logger with environment detection and rich formatting",
   "keywords": [
     "logger",

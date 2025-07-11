@@ -6,6 +6,16 @@
 
 import { LogLevel, LoggerOptions, LogLevelConfig, LoggerInterface, FormatMessageResult } from './types';
 
+// ANSI 颜色转义序列映射
+const ANSI_COLORS = {
+  '#FF5722': '\x1b[31m', // 红色 (ERROR)
+  '#FF9800': '\x1b[33m', // 黄色 (WARN)
+  '#2196F3': '\x1b[34m', // 蓝色 (INFO)
+  '#4CAF50': '\x1b[32m', // 绿色 (DEBUG)
+  '#9C27B0': '\x1b[35m'  // 紫色 (TRACE)
+};
+const ANSI_RESET = '\x1b[0m';
+
 export class Logger implements LoggerInterface {
   private isDev: boolean;
   private enableColors: boolean;
@@ -113,12 +123,22 @@ export class Logger implements LoggerInterface {
 
     const { prefix, color, method, args: logArgs } = this.formatMessage(level, args);
 
-    if (this.enableColors && typeof window !== 'undefined') {
-      console[method](
-        `%c${prefix}`,
-        `color: ${color}; font-weight: bold;`,
-        ...logArgs
-      );
+    if (this.enableColors) {
+      if (typeof window !== 'undefined') {
+        // 浏览器环境：使用 CSS 颜色
+        console[method](
+          `%c${prefix}`,
+          `color: ${color}; font-weight: bold;`,
+          ...logArgs
+        );
+      } else {
+        // Node.js 环境：使用 ANSI 转义序列
+        const ansiColor = ANSI_COLORS[color as keyof typeof ANSI_COLORS] || '';
+        console[method](
+          `${ansiColor}${prefix}${ANSI_RESET}`,
+          ...logArgs
+        );
+      }
     } else {
       console[method](prefix, ...logArgs);
     }
@@ -175,12 +195,22 @@ export class Logger implements LoggerInterface {
     const { prefix } = this.formatMessage('INFO', [label]);
     const method = collapsed ? 'groupCollapsed' : 'group';
 
-    if (this.enableColors && typeof window !== 'undefined') {
-      console[method](
-        `%c${prefix}`,
-        `color: ${this.levels.INFO.color}; font-weight: bold;`,
-        label
-      );
+    if (this.enableColors) {
+      if (typeof window !== 'undefined') {
+        // 浏览器环境：使用 CSS 颜色
+        console[method](
+          `%c${prefix}`,
+          `color: ${this.levels.INFO.color}; font-weight: bold;`,
+          label
+        );
+      } else {
+        // Node.js 环境：使用 ANSI 转义序列
+        const ansiColor = ANSI_COLORS[this.levels.INFO.color as keyof typeof ANSI_COLORS] || '';
+        console[method](
+          `${ansiColor}${prefix}${ANSI_RESET}`,
+          label
+        );
+      }
     } else {
       console[method](prefix, label);
     }
