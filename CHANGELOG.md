@@ -13,7 +13,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Performance metrics dashboard
 - Log shipping to external services
 
-## [1.0.0] - 2025-01-14
+## [1.0.1] - 2025-07-11
+
+### Fixed
+- Environment detection description in README.md
+
+
+## [1.0.0] - 2025-07-08
 
 ### Added
 - Initial release of vnlog
