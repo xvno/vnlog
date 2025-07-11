@@ -9,10 +9,10 @@
     "console",
     "typescript"
   ],
-  "author": "wei",
+  "author": "xvno",
   "repository": {
     "type": "git",
-    "url": "https://github.com/vnox/vnlog.git"
+    "url": "https://github.com/xvno/vnlog.git"
   },
   "license": "MIT",
   "engines": {

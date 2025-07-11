@@ -25,6 +25,11 @@ npm install vnlog
 
 ## 🚀 Quick Start
 
+> ```js
+> // We should set the environment to development first
+> process.env.NODE_ENV = 'development'
+> ```
+
 ### JavaScript (CommonJS)
 
 ```javascript
@@ -167,6 +172,79 @@ vnlog automatically detects the environment using `process.env.NODE_ENV`:
 - **Development**: All logs are shown (default behavior)
 - **Production**: All logs are suppressed
 - **Test**: All logs are suppressed
+
+### Environment Variable Configuration
+
+#### Command Line (Temporary)
+
+**Linux/macOS:**
+```bash
+# Development (logs will be shown)
+NODE_ENV=development node your-app.js
+
+# Production (logs will be suppressed)
+NODE_ENV=production node your-app.js
+```
+
+**Windows Command Prompt:**
+```cmd
+set NODE_ENV=development && node your-app.js
+set NODE_ENV=production && node your-app.js
+```
+
+**Windows PowerShell:**
+```powershell
+$env:NODE_ENV="development"; node your-app.js
+$env:NODE_ENV="production"; node your-app.js
+```
+
+#### Package.json Scripts
+
+```json
+{
+  "scripts": {
+    "dev": "NODE_ENV=development node src/index.js",
+    "start": "NODE_ENV=production node src/index.js",
+    "debug": "NODE_ENV=development node --inspect src/index.js"
+  }
+}
+```
+
+#### Using .env Files
+
+```bash
+# Install dotenv
+npm install dotenv
+```
+
+Create `.env` file in project root:
+```env
+NODE_ENV=development
+```
+
+Load in your application:
+```javascript
+// At the top of your main file
+require('dotenv').config();
+```
+
+#### System Environment Variables (Permanent)
+
+**Linux/macOS:**
+```bash
+# Add to ~/.bashrc or ~/.zshrc
+export NODE_ENV=development
+```
+
+**Windows:**
+Set through System Properties → Advanced → Environment Variables
+
+#### Verify Configuration
+
+```js
+console.log('Current environment:', process.env.NODE_ENV);
+console.log('Is development:', process.env.NODE_ENV === 'development');
+```
 
 ### Log Levels
 
